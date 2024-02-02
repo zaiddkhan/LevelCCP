@@ -85,6 +85,7 @@ fun CountryCodePick() {
                 isNumberValid = isValid
             },
             label = { Text("Phone Number") },
+            typography = MaterialTheme.typography
         )
         Spacer(modifier = Modifier.height(10.dp))
 

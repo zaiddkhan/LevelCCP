@@ -1,6 +1,2 @@
 jdk:
   - openjdk17
-before_install:
-  - ./scripts/prepareJitpackEnvironment.sh
-install:
-  - ./gradlew :ccp:assemble :ccp:publishToMavenLocal
