@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -83,7 +84,7 @@ fun CountryDialog(
     modifier: Modifier = Modifier,
     countryList: List<CountryData> = persistentListOf(),
     rowPadding: Dp = DEFAULT_ROW_PADDING,
-    backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    backgroundColor: Color = Color((0XFF282234)),
     dividerColor: Color ,
     textColor: Color
 ) {
@@ -120,16 +121,18 @@ fun CountryDialog(
                         modifier = Modifier.padding(horizontal = SEARCH_ICON_PADDING),
                     )
                 },
+                textColor = textColor
             )
             Spacer(modifier = Modifier.height(DEFAULT_ROW_PADDING))
             LazyColumn {
                 items(filteredCountries, key = { it.countryIso }) { countryItem ->
-                    Divider(color = dividerColor)
+                    HorizontalDivider(color = dividerColor)
                     CountryRowItem(
                         rowPadding = rowPadding,
                         onSelect = { onSelect(countryItem) },
                         countryItem = countryItem,
                         textStyle = textStyle,
+                        textColor
                     )
                 }
             }
@@ -160,6 +163,7 @@ private fun HeaderRow(
         Spacer(modifier = Modifier.width(DEFAULT_ROW_PADDING))
         Text(
             text = stringResource(id = R.string.select_country),
+            color = textColor
         )
         Spacer(modifier = Modifier.weight(1f))
         IconButton(
@@ -180,6 +184,7 @@ private fun CountryRowItem(
     onSelect: () -> Unit,
     countryItem: CountryData,
     textStyle: androidx.compose.material3.Typography,
+    color : Color
 ) {
     Row(
         Modifier
@@ -202,6 +207,7 @@ private fun CountryRowItem(
                     ),
             style = textStyle.labelMedium,
             overflow = TextOverflow.Ellipsis,
+            color = color
         )
     }
 }
@@ -213,6 +219,7 @@ private fun SearchTextField(
     textStyle: androidx.compose.material3.Typography,
     leadingIcon: (@Composable () -> Unit)? = null,
     hint: String = stringResource(id = R.string.search),
+    textColor: Color
 ) {
     val requester = remember { FocusRequester() }
 
@@ -221,7 +228,7 @@ private fun SearchTextField(
     }
 
     BasicTextField(
-        modifier = Modifier
+         modifier = Modifier
             .padding(horizontal = DEFAULT_ROW_PADDING)
             .height(MIN_TAP_DIMENSION)
             .fillMaxWidth()
@@ -229,8 +236,10 @@ private fun SearchTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        cursorBrush = SolidColor(Color.Black),
-        textStyle = textStyle.labelMedium,
+        cursorBrush = SolidColor(textColor),
+        textStyle = textStyle.labelMedium.copy(
+            color = textColor
+        ),
         decorationBox = { innerTextField ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -247,7 +256,7 @@ private fun SearchTextField(
                         Text(
                             text = hint,
                             maxLines = 1,
-                            style = textStyle.labelMedium,
+                            style = textStyle.labelMedium
                         )
                     }
                 innerTextField()

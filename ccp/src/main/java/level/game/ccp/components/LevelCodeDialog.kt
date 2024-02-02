@@ -78,8 +78,7 @@ fun LevelCodeDialog(
             showCountryCode = showCountryCode,
             showFlag = showFlag,
             country = country,
-            textStyle = textStyle,
-            iconColor = MaterialTheme.colorScheme.onSurface,
+            textStyle = textStyle
         )
 
         if (isOpenDialog) {
@@ -109,8 +108,7 @@ private fun CountryRow(
     showFlag: Boolean,
     country: CountryData,
     textStyle: Typography,
-    modifier: Modifier = Modifier,
-    iconColor : Color
+    modifier: Modifier = Modifier
 ) = Row(
     modifier = modifier,
     horizontalArrangement = Arrangement.SpaceBetween,
@@ -124,11 +122,6 @@ private fun CountryRow(
         ),
         modifier = Modifier.padding(start = DEFAULT_PADDING),
         style = textStyle.labelMedium,
-    )
-    Icon(
-        imageVector = Icons.Default.ArrowDropDown,
-        contentDescription = null,
-        tint =  iconColor ,
     )
 }
 

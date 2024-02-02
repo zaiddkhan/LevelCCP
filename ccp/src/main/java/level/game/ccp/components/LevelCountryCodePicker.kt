@@ -214,8 +214,8 @@ fun TogiCountryCodePicker(
                 showCountryCode = showCountryCode,
                 showFlag = showCountryFlag,
                 textStyle = typography,
-                backgroundColor = Color.Black,
-                textColor = Color.Black,
+                backgroundColor =Color(0XFF282234),
+                textColor = Color.White,
                 dividerColor = Color.Black,
                 iconColor = Color.Black
             )
@@ -299,4 +299,17 @@ private fun ClearIconButton(
         contentDescription = stringResource(id = R.string.clear),
         tint = Color.Black,
     )
+}
+
+internal fun getCountryFromPhoneCode(code: PhoneCode, context: Context): CountryData? {
+    val countries = CountryData.entries.filter { it.countryPhoneCode == code }
+    return when (countries.size) {
+        0 -> null
+        1 -> countries.firstOrNull()
+        else -> {
+            val userIso = getUserIsoCode(context)
+            countries.firstOrNull { it.countryIso == userIso }
+                ?: if (code == "+1") CountryData.UnitedStates else countries.firstOrNull()
+        }
+    }
 }
