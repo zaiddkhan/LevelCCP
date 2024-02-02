@@ -37,7 +37,7 @@ import level.game.ccp.data.utils.sortedByLocalizedName
 internal val DEFAULT_PADDING = 10.dp
 
 @Composable
-internal fun LevelCodeDialog(
+fun LevelCodeDialog(
     selectedCountry: CountryData,
     includeOnly: ImmutableSet<String>?,
     onCountryChange: (CountryData) -> Unit,
