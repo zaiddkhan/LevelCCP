@@ -223,9 +223,6 @@ private fun SearchTextField(
 ) {
     val requester = remember { FocusRequester() }
 
-    LaunchedEffect(Unit) {
-        requester.requestFocus()
-    }
 
     BasicTextField(
          modifier = Modifier
