@@ -221,15 +221,13 @@ private fun SearchTextField(
     hint: String = stringResource(id = R.string.search),
     textColor: Color
 ) {
-    val requester = remember { FocusRequester() }
 
 
     BasicTextField(
          modifier = Modifier
             .padding(horizontal = DEFAULT_ROW_PADDING)
             .height(MIN_TAP_DIMENSION)
-            .fillMaxWidth()
-            .focusRequester(requester),
+            .fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
